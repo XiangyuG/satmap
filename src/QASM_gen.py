@@ -2,9 +2,10 @@ from qiskit import QuantumCircuit
 
 #TODO: N = 2 - 15
 # N = 2
+N = 2
 qc = QuantumCircuit(N)
-qc = QuantumCirqc.h(0)
-qc = QuantumCirqc.cx(0,1)
+qc.h(0)
+qc.cx(0,1)
 qc.h(1)
 qc.draw()
 
@@ -36,4 +37,16 @@ qc.h(3)
 qc.draw()
 '''
 
-print(qc.qasm())
+f = open('qasm.txt','w')
+
+for N in range(3,16):
+    print("N = ", N, file=f)
+    print("qc = QuantumCircuit(N)", file=f)
+    for i in range(0,N):
+        print("qc.h(", i, ")", file=f)
+        for j in range(i+1, N):
+            print("qc.cx(", i,",",j, ")", file=f)
+    print("qc.draw()\n", file=f)
+
+
+# print(qc.qasm())
