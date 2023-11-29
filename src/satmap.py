@@ -808,6 +808,33 @@ if __name__ == "__main__":
         "16_linear" : architectures.linearArch(16),
         "tokyo_full_diags" : architectures.tokyo_all_diags(),
         "tokyo_no_diags" : architectures.tokyo_no_diags(),
+        'NN_2' : architectures.NN_2D(2),
+        'NN_3' : architectures.NN_2D(3),
+        'NN_4' : architectures.NN_2D(4),
+        'NN_5' : architectures.NN_2D(5),
+        'NN_6' : architectures.NN_2D(6),
+        'NN_7' : architectures.NN_2D(7),
+        'NN_8' : architectures.NN_2D(8),
+        'NN_9' : architectures.NN_2D(9),
+        'NN_10' : architectures.NN_2D(10),
+        'NN_11' : architectures.NN_2D(11),
+        'NN_12' : architectures.NN_2D(12),
+        'NN_13' : architectures.NN_2D(13),
+        'NN_14' : architectures.NN_2D(14),
+        'NN_15' : architectures.NN_2D(15),
+        'NN_16' : architectures.NN_2D(16),
+        'NN_17' : architectures.NN_2D(17),
+        'NN_18' : architectures.NN_2D(18),
+        'NN_19' : architectures.NN_2D(19),
+        'NN_20' : architectures.NN_2D(20),
+        '2_N' : architectures.twoN(2),
+        '3_N' : architectures.twoN(3),
+        '4_N' : architectures.twoN(4),
+        '5_N' : architectures.twoN(5),
+        '6_N' : architectures.twoN(6),
+        'Sycamore_2' : architectures.Sycamore(2),
+        'Sycamore_4' : architectures.Sycamore(4),
+        'Sycamore_6' : architectures.Sycamore(6),
         'tokyo_drop_2' : architectures.tokyo_drop_worst_n(2, architectures.tokyo_error_map()),
         'tokyo_drop_6' : architectures.tokyo_drop_worst_n(6, architectures.tokyo_error_map()),
         'tokyo_drop_10' : architectures.tokyo_drop_worst_n(10, architectures.tokyo_error_map()),
@@ -826,7 +853,7 @@ if __name__ == "__main__":
     base, _ = os.path.splitext(os.path.basename(args.prog))
     #print(transpile(args.prog, arch, 1, "prob_"+base, "sol_"+base, slice_size=args.k, max_sat_time=args.timeout, routing= not args.no_route, weighted= args.weighted, calibrationData=error_rates[args.err] if args.err else None, bounded_above=False ))
     (stats, qasm) = transpile(args.prog, arch, 1, "prob_"+base, "sol_"+base, slice_size=args.k, max_sat_time=args.timeout, routing= not args.no_route, weighted= args.weighted, calibrationData=error_rates[args.err] if args.err else None, bounded_above=True )
-    print(stats)
+    print("stats =", stats)
     out_file = args.output_path if args.output_path else "mapped_"+os.path.basename(args.prog)
     with open(out_file, "w") as f:
         f.write(qasm) 

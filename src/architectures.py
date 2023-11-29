@@ -36,6 +36,69 @@ def linearArch(n):
     graph[n-1][n-2] = 1
     return graph
 
+def NN_2D(n):
+    graph = np.zeros((n * n, n * n))
+    for i in range(n):
+        graph[i * n][i * n + 1] = 1
+        for j in range(1, n - 1):
+            graph[i * n + j][i * n + j + 1] = 1
+            graph[i * n + j][i * n + j - 1] = 1
+        graph[i * n + n - 1][i * n + n - 2] = 1
+    for i in range(n):
+        graph[i][i + n] = 1
+        # row number
+        for j in range(1, n - 1):
+            graph[j * n + i][j * n + i + n] = 1
+            graph[j * n + i][j * n + i - n] = 1
+        graph[(n - 1) * n + i][(n - 1) * n + i - n] = 1
+    return graph
+
+def twoN(n):
+    graph = np.zeros((2 * n,2 * n))
+    for i in range(2):
+        graph[i * n][i * n + 1] = 1
+        for j in range(1, n - 1):
+            graph[i * n + j][i * n + j + 1] = 1
+            graph[i * n + j][i * n + j - 1] = 1
+        graph[i * n + n - 1][i * n + n - 2] = 1
+    for i in range(n):
+        graph[i][i + n] = 1
+        graph[i + n][i] = 1
+    return graph
+
+def Sycamore(n):
+    graph = np.zeros((n * n, n * n))
+    pos = []
+    for i in range(int(n / 2)):
+        u_l = []
+        d_l = []
+        for j in range(i * n * 2, i * n * 2 + n * 2):
+            if j % 2 == 0:
+                u_l.append(j)
+            else:
+                d_l.append(j)
+        pos.append(u_l)
+        pos.append(d_l)
+    for i in range(n - 1):
+        for j in range(n):
+            node1 = pos[i][j]
+            node2 = pos[i + 1][j]
+            graph[node1][node2] = 1
+            graph[node2][node1] = 1
+        if i % 2 == 0:
+            for j in range(1, n):
+                node1 = pos[i][j]
+                node2 = pos[i + 1][j - 1]
+                graph[node1][node2] = 1
+                graph[node2][node1] = 1
+        else:
+            for j in range(0, n - 1):
+                node1 = pos[i][j]
+                node2 = pos[i + 1][j + 1]
+                graph[node1][node2] = 1
+                graph[node2][node1] = 1
+    return graph
+
 def meshArch(n,m):
     graph = np.zeros((n*m,n*m))
     for i in range(n*m):
